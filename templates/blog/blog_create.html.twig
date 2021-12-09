@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Blog Symfony | Nouvel article
+{% endblock %}
+
+{% block body %}
+    {% if editMode %}
+        <h1 class="text-center my-5">Modification de l'article</h1>
+    {% else %}
+        <h1 class="text-center my-5">Nouvel Article</h1>
+    {% endif %}
+    
+    {# <form method="post">
+        <div class="mb-3">
+            <label for="titre" class="form-label">Titre</label>
+            <input type="text" class="form-control" id="titre" name="titre">
+        </div>
+        <div class="mb-3">
+            <label for="contenu" class="form-label">Contenu</label>
+            <textarea type="text" class="form-control" rows="10" id="contenu" name="contenu"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="photo" class="form-label">Photo</label>
+            <input type="text" class="form-control" id="photo" name="photo">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form> #}
+
+    {# 2eme version du formulaire #}
+    {# formArticle ne sort pas de null, c'est le résultat du createView(), c'est ce que le controller à transmis au template, il contient tout les champs du formulaire #}
+
+    {{ form_start(formArticle) }}
+        {{ form_row(formArticle.titre) }}
+        {{ form_row(formArticle.contenu)}}
+        {{ form_row(formArticle.photo) }}
+        {{ form_row(formArticle.category) }}
+
+        {% if photoActuelle %}
+            <em>Vous pouvez insérer une nouvelle photo si vous le souhaitez</em>
+            <div class="col-2">
+                <img src="{{ asset('uploads/photos/' ~ photoActuelle) }}" alt="" class="col-12 img-responsive">
+            </div>
+        {% endif %}
+        <button type="submit" class="btn btn-dark">Enregistrer</button>
+    {{ form_end(formArticle) }}
+{% endblock %}

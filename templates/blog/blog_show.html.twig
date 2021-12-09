@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    BlogSymfony | Détails de l'article
+{% endblock %}
+
+{% block body %}
+    <h1> Détails de l'article </h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="col-6 mx-auto text-center alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% if article.photo != null %}
+      {% set col = 8 %}
+    {% else %}
+      {% set col = 12 %}
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+                <div class="col-{{ col }} p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-success">{{ article.category.titre }}</strong>
+                <h3 class="mb-0">{{ article.titre }}</h3>
+                <div class="mb-1 text-muted">{{ article.date|date("d-m-Y H:i")}}</div>
+                <p class="card-text mb-auto">{{ article.contenu|striptags }}</p>
+                <div class="mt-3">
+                    <a href="{{ path('blog_edit', {'id': article.id}) }}" class="btn btn-dark">Modifier</a>
+                    <a href="#" class="btn btn-primary">Imprimer</a>
+                </div>
+                </div>
+                {% if article.photo != null %}
+                    <div class="col-4 d-none d-lg-block">
+                        <img src="{{ asset('uploads/photos/' ~ article.photo) }}" alt="{{article.photo}}" class="col-12">
+                    </div>                    
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    <h2 class="mt-4">Donner votre avis</h2>
+
+   {% if app.user %}
+
+   {{ form_start(formComment) }}
+
+        {{ form_widget(formComment) }}
+        
+        <button class="btn btn-dark">Poster
+        </button>
+
+  {{ form_end(formComment) }}
+
+       {% else %}
+       <p><a class="link-secondary" href="{{ path('app_register') }}">Créer votre compte</a> ou <a class="link-secondary"² href="{{ path('app_login')}} ">Identifiez-vous</a> afin de pouvoir poster un avis.</p>
+   {% endif %}
+        </div>
+        <div class="col-8">
+            {{  comment.commentaire|raw }}
+        </div>
+        </div>
+
+        {% endfor %}
+    {% endif %}
+
+
+{% endblock %}

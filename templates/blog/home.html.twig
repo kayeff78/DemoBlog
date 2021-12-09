@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Template Home
+{% endblock %}
+
+{# Ce block body fait référence au block body déclaré dans 'base.html.twig' #}
+{% block body %}
+
+{# title est une variable twig qui ne sort pas null part, elle provient du controller BlogController et plus précisement de la methode render définit dans la méthode home()
+    Tout ce qui est traité dans les templates vient forcément d'un controller
+
+    TWIG est un langage de rendu, un moteur de template :
+     - Simplicité du langage
+     - Absence de PHP au sein de l'affichage
+     - Plus simple pour un intégrateur
+     - Plus rapide à l'execution
+ #}
+
+{% for message in app.flashes('success') %}
+
+<div class="col-8 mx-auto text-center p-3 bg-primary text-white my-3">
+            {{message}}
+</div>
+    
+{% endfor %}
+<h1 class="text-center my-5">{{ title }}</h1>
+
+{% if age > 18 %}
+    <p>Tu es majeur ! </p>
+{% else %}
+    <p>Tu es mineur ! </p>
+{% endif %}
+
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, incidunt vitae harum alias quidem earum quod fugiat praesentium dolore libero reiciendis ab, ullam odit, sapiente enim sit labore. Laudantium officia qui sequi modi, est id excepturi autem odit assumenda voluptatem ad accusantium atque quod quia molestiae consequuntur, hic in voluptatum quisquam fuga. Sint expedita quisquam corporis magnam quod! Nobis est molestiae, et libero sed architecto accusamus cupiditate doloremque laudantium pariatur voluptate doloribus consequatur eos facere velit deserunt cum ad. Id quisquam rem ullam doloremque harum corporis repudiandae modi, quae ipsum natus cum optio minus maiores est, dolores officiis. Omnis, accusantium.</p>
+<br>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo magni laborum sint id asperiores fugit delectus minima, perspiciatis sunt placeat. Aliquid numquam esse tempora delectus accusantium expedita culpa dolorum eum. Dignissimos possimus nihil, esse animi, eius natus ex et vero qui, quidem dolore? Doloremque, nemo expedita qui itaque ullam necessitatibus ipsa, tenetur perspiciatis, inventore fuga earum hic vel est corrupti beatae commodi quia voluptate consequuntur dignissimos. Officia tenetur magni incidunt maiores ex omnis dignissimos ipsum veniam. Unde voluptate molestias, est earum cum necessitatibus quam ipsa, aliquid odio quis nihil, delectus dolorum porro consectetur! Quos non eveniet, eaque consequuntur rerum dolor.</p>
+<br>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo magni laborum sint id asperiores fugit delectus minima, perspiciatis sunt placeat. Aliquid numquam esse tempora delectus accusantium expedita culpa dolorum eum. Dignissimos possimus nihil, esse animi, eius natus ex et vero qui, quidem dolore? Doloremque, nemo expedita qui itaque ullam necessitatibus ipsa, tenetur perspiciatis, inventore fuga earum hic vel est corrupti beatae commodi quia voluptate consequuntur dignissimos. Officia tenetur magni incidunt maiores ex omnis dignissimos ipsum veniam. Unde voluptate molestias, est earum cum necessitatibus quam ipsa, aliquid odio quis nihil, delectus dolorum porro consectetur! Quos non eveniet, eaque consequuntur rerum dolor.</p>
+<br>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo magni laborum sint id asperiores fugit delectus minima, perspiciatis sunt placeat. Aliquid numquam esse tempora delectus accusantium expedita culpa dolorum eum. Dignissimos possimus nihil, esse animi, eius natus ex et vero qui, quidem dolore? Doloremque, nemo expedita qui itaque ullam necessitatibus ipsa, tenetur perspiciatis, inventore fuga earum hic vel est corrupti beatae commodi quia voluptate consequuntur dignissimos. Officia tenetur magni incidunt maiores ex omnis dignissimos ipsum veniam. Unde voluptate molestias, est earum cum necessitatibus quam ipsa, aliquid odio quis nihil, delectus dolorum porro consectetur! Quos non eveniet, eaque consequuntur rerum dolor.</p>
+
+
+
+{% endblock %}

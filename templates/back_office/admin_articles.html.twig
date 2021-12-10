@@ -1,0 +1,46 @@
+{% extends "base_admin.html.twig" %}
+
+{% block title %}
+
+     BlogSymfony | Gestion des articles
+
+{% endblock %}
+
+{% block body %}
+
+
+
+     <table class="table table-striped">
+          <tr>
+          {# colonnes : objet (BackOfficeController) qui contient tout les noms des champs/colonnes #}
+          {% for data in colonnes %}
+
+               {% if data != 'id' %}
+                    
+               <th class="text-center">{{data|capitalize }}</th>
+               {% endif %}
+
+          {% endfor %}
+               <th>Cat.</th>
+               <th>Nb Comm.</th>
+               <th>Action</th>
+
+               {% for article in articles %}
+
+               {% if article != 'id' %}
+                    <tr>
+                    <td>{{article.titre}}</td>
+                    <td>{{article.contenu}}</td>
+                    <td> <img src="{{ asset('uploads/photos/' ~ article.photo) }}" alt="{{article.photo}}" class="col-12 img-responsive"></td>
+                    <td>{{ article.date|date("m/d/Y") }}</td>
+                     <td>{{article.category.titre}}</td>
+                    <td>{{article.commentaires|length}}</td>
+                    </tr>
+                    <td><a href="{{ path('blog_edit') }}" class="stretched-link">Modifier</a></td>
+                    {% endif %}
+               {% endfor %}
+          </tr>
+          
+     </table>
+
+{% endblock %}

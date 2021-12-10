@@ -55,7 +55,7 @@
                 <div class="col-4 pt-1">
                 {# Si app.user retourne, cela veut dire que l'internaute est authentifié, on entre dans le IF #}
                 {% if app.user %}
-                    <a class="link-dark" href="" title="Accès à votre compte">Bonjour <strong>{{ app.user.prenom }} {{ app.user.nom }}</strong></a>
+                    <a class="link-dark" href="{{ path('app_profil') }}" title="Accès à votre compte">Bonjour <strong>{{ app.user.prenom }} {{ app.user.nom }}</strong></a>
                     {% else %}
                     <a class="link-secondary" href="{{ path('app_register') }}">Créer votre compte</a>
                 {% endif %}
@@ -70,11 +70,15 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Rechercher</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
                     </a>
 
-                    {% if app.user %}
+                    {# is_granted(): fonction twig qui verifie si l'utilisateur ici a un role_admin enregistré dans la session donc en BDD #}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-sm btn-outline-dark me-2" href="{{ path('app_admin') }}">BACKOFFICE</a>
+                    {% endif %}
 
-                        <a class="btn btn-sm btn-outline-primary" href="{{ path('app_logout') }}">Deconnexion</a>
+                    {% if app.user %}
+                        <a class="btn btn-sm btn-outline-dark me-2" href="{{ path('app_logout') }}">Deconnexion</a>
                     {% else %}
-                        <a class="btn btn-sm btn-outline-primary" href="{{ path('app_login') }}">Identifiez-vous</a>
+                        <a class="btn btn-sm btn-outline-dark me-2" href="{{ path('app_login') }}">Identifiez-vous</a>
                     {% endif %}
                     
                 </div>
@@ -117,6 +121,7 @@
             {% endblock %}
 
         </main>
+        
 
         <footer class="blog-footer">
             <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>

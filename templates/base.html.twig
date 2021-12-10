@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
-        <meta name="author" content="Peixoto Guillaume">
+        <meta name="author" content="Kizeyi Florian">
         <title>
         {% block title %}
             
@@ -46,24 +46,57 @@
         <!-- Custom styles for this template -->
         <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
         {# asset() : fonction TWIG qui retourne un chemin absolu à partir du dossier 'public' jusqu'au fichier 'blog.css' #}
+        <style>
+        body {
+            background: linear-gradient(#e66465, #9198e5);
+            
+            
+        }  
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        .span1 {
+            color: #F3ED2A;
+            
+        }
+        .span2 {
+            color: #25A71F;
+            text-transform: uppercase;
+           
+        }
+        .span3 {
+            color: red;
+        }
+        .span4 {
+            color: #25A71F; 
+        }
+        img {
+            height:250px;
+            object-fit: cover;
+        }
+        .imgTitre {
+            height:150px !important;
+        }
+        </style>
     </head>
     <body>
     
-        <div class="container">
+        <div class="container-fluid">
             <header class="blog-header py-3">
                 <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-4 pt-1">
                 {# Si app.user retourne, cela veut dire que l'internaute est authentifié, on entre dans le IF #}
                 {% if app.user %}
-                    <a class="link-dark" href="{{ path('app_profil') }}" title="Accès à votre compte">Bonjour <strong>{{ app.user.prenom }} {{ app.user.nom }}</strong></a>
+                    <a class="" href="{{ path('app_profil') }}" title="Accès à votre compte"><span class="span1">Bonjour</span>  <span class="span4">{{ app.user.prenom }}</span> <span class="span3"> X</span> <span class="span2">{{ app.user.nom }}</span></a>
                     {% else %}
-                    <a class="link-secondary" href="{{ path('app_register') }}">Créer votre compte</a>
+                    <a class="" href="{{ path('app_register') }}">Créer votre compte</a>
                 {% endif %}
 
                     
                 </div>
                 <div class="col-4 text-center">
-                    <a class="blog-header-logo text-dark" href="#">Symfony</a>
+                    <a class="blog-header-logo text-dark" href="#"><img src="{{asset('uploads/photos/titre_HxH.png')}}" class="imgTitre"alt="titre"></a>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
                     <a class="link-secondary" href="#" aria-label="Search">
@@ -85,6 +118,7 @@
                 </div>
             </header>
 
+            <div class="container-fluid">
             <div class="nav-scroller py-1 mb-2">
                 <nav class="nav d-flex justify-content-between">
                 <a class="p-2 link-secondary" href="{{path('blog_create')}}">Nouvel article</a>
@@ -98,7 +132,7 @@
                 <a class="p-2 link-secondary" href="#">Science</a>
                 <a class="p-2 link-secondary" href="#">Health</a>
                 <a class="p-2 link-secondary" href="#">Style</a>
-                <a class="p-2 link-secondary" href="#">Travel</a>
+                <a class="p-2 link-secondary" href="#">En savoir plus</a>
                 </nav>
             </div>
         </div>
@@ -107,8 +141,8 @@
 
             <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
                 <div class="col-md-12 px-0">
-                    <h1 class="display-4 fst-italic">Les nouveauté du JUMP FESTA de Décembre 2021</h1>
-                    <p class="lead my-3">Découvrez le calendrier des annonces et qui seront nos invités</p>
+                    <h1 class="display-4 fst-italic">Trop nul la vie sans mangas! </h1>
+                    <p class="lead my-3">Comment Hunter X Hunter s'est hissé au sommet du monde avec ses personnages plus authentiques les uns que les autres</p>
                     <p class="lead mb-0"><a href="{{ path('blog') }}" class="text-white fw-bold">Détails</a></p>
                 </div>
             </div>
@@ -124,9 +158,9 @@
         
 
         <footer class="blog-footer">
-            <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            <p> &copy; 2021 Tous droits réservés. | Florian Kizeyi
             <p>
-                <a href="#">Back to top</a>
+                <a href="#">Remonter en haut</a>
             </p>
         </footer>
 

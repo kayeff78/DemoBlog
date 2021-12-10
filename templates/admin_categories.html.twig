@@ -1,0 +1,48 @@
+{% extends "base_admin.html.twig" %}
+
+{% block title %}
+
+     BlogSymfony | Gestion des articles
+     
+
+{% endblock %}
+
+{% block body %}
+ <table class="table table-striped" id="table-category">
+     <thead>
+          <tr>
+   {% for data in colonnes %}
+
+               {% if data != 'id' %}
+                    
+               <th class="text-center">{{data|capitalize }}</th>
+               {% endif %}
+
+          {% endfor %}
+               <th>Cat.</th>
+               <th>Nb Comm.</th>
+               <th>Action</th>
+          </tr>
+     </thead>
+     <tbody>
+{% for data in allCategory %} 
+
+               <tr>
+                    <td>{{data.titre}}</td>
+                    <td>{{data.description}}</td>
+                    <td class="text-center">{{data.articles|length }}</td>
+                    <td>
+                         <a href="{{path('admin_edit',{'id':data.id}) }}" class="btn btn-success mb-3"><i class="bi bi-pencil-fill"></i></a>
+
+                          <a href="{{path('admin_edit',{'id':data.id}) }}" class="btn btn-primary mb-3"><i class="bi bi-pencil-square"></i></a>
+
+                         <a href="{{path('app_admin_articles_remove',{'id':data.id}) }}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer l\'article n°{{data.id}}'));">
+                         <i class="bi bi-trash-fill"></i>
+                         </a>
+                    </td> 
+               </tr>
+               {% endfor %}  
+     </tbody>
+     </table>
+     
+{% endblock %}

@@ -27,7 +27,7 @@ class ArticleType extends AbstractType
                 'attr' => ["placeholder" => "Saisir le titre de l'article"],
                 'constraints' => [
                     new Length([
-                        'min' => 10,
+                        'min' => 6,
                         'max' => 50,
                         'minMessage' => "Titre trop court (min 10 caractères)",
                         'maxMessage' => "Titre trop long (max 50 caractères)"

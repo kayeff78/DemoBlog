@@ -18,7 +18,9 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
+        if($options ['userRegistration'] == true)
+        {
+            $builder
             ->add('email', TextType::class, [
                 'required'=> false,
                 'constraints'=> [
@@ -90,14 +92,68 @@ class RegistrationFormType extends AbstractType
                         'minMessage' => "Votre mot de passe doit contenir au minimum 8 caractères."
                     ])
                 ]
+            ]);
+        }
+        elseif($options['userUpdate'] == true)
+        {
+            $builder
+            ->add('email', TextType::class, [
+                'required'=> false,
+                'constraints'=> [
+                    new NotBlank([
+                        'message' => "Veuillez renseigner votre email."
+                    ])
+                ]
             ])
-        ;
+            ->add('prenom', TextType::class, [
+                'required'=> false,
+                'constraints'=> [
+                    new NotBlank([
+                        'message' => "Veuillez renseigner votre prenom."
+                    ])
+                ]
+            ])
+            ->add('nom',  TextType::class, [
+                'required'=> false,
+                'constraints'=> [
+                    new NotBlank([
+                        'message' => "Veuillez renseigner votre nom."
+                    ])
+                ]
+            ])
+            ->add('adresse', TextType::class, [
+                'required'=> false,
+                'constraints'=> [
+                    new NotBlank([
+                        'message' => "Veuillez renseigner votre adresse."
+                    ])
+                ]
+            ])
+            ->add('ville', TextType::class, [
+                'required'=> false,
+                'constraints'=> [
+                    new NotBlank([
+                        'message' => "Veuillez renseigner votre ville."
+                    ])
+                ]
+            ])
+            ->add('codePostal', TextType::class, [
+                'required'=> false,
+                'constraints'=> [
+                    new NotBlank([
+                        'message' => "Veuillez renseigner votre code postal."
+                    ])
+                ]
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'userRegistration' => false,
+            'userUpdate' => false
         ]);
-    }
+    } 
 }

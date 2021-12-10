@@ -43,25 +43,31 @@
     </div>
     <h2 class="mt-4">Donner votre avis</h2>
 
-   {% if app.user %}
+    {% if app.user %}
+        {{ form_start(formComment) }}
+            {{ form_row(formComment.commentaire)}}
+            <button type="submit" class="btn btn-dark">Envoyé</button>
+        {{ form_end(formComment) }}
+    {% else %}
+        <p><a href=" {{ path('app_register') }} ">Crée votre compte</a> ou <a href=" {{ path('app_login') }} ">identifiez-vous</a> afin de pouvoir commenter cet article.</p>
+    {% endif %}
 
-   {{ form_start(formComment) }}
 
-        {{ form_widget(formComment) }}
-        
-        <button class="btn btn-dark">Poster
-        </button>
 
-  {{ form_end(formComment) }}
-
-       {% else %}
-       <p><a class="link-secondary" href="{{ path('app_register') }}">Créer votre compte</a> ou <a class="link-secondary"² href="{{ path('app_login')}} ">Identifiez-vous</a> afin de pouvoir poster un avis.</p>
-   {% endif %}
-        </div>
-        <div class="col-8">
-            {{  comment.commentaire|raw }}
-        </div>
-        </div>
+    {% if article.commentaires|length == 0 %}
+        <h2 class="text-center my-4">Aucun commentaire. Soyez le premier a réagir</h2>
+    {% else %}
+        <h2 class="mt-4">Dernier avis</h2>
+        {% for comment in article.commentaires %}
+            
+            <div class="d-flex border rounded my-2 p-2">
+                <div class="col-4 d-flex">
+                    <p class="m-auto">Publié par {{ comment.auteur }} <small>( le {{ comment.date|date('d/m/Y') }})</small></p>
+                </div>
+                <div class="col-8">
+                    {{  comment.commentaire|raw }}
+                </div>
+            </div>
 
         {% endfor %}
     {% endif %}

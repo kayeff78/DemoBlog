@@ -8,9 +8,16 @@
 
 {% block body %}
 
+{% for message in app.flashes('success') %}
+
+<div class="col-6 mx-auto text-center bg-success p-3 text-white mb-3"> {{ message }}
+</div>
+     
+{% endfor %}
 
 
-     <table class="table table-striped">
+     <table class="table table-striped" id="table-backoffice">
+     <thead>
           <tr>
           {# colonnes : objet (BackOfficeController) qui contient tout les noms des champs/colonnes #}
           {% for data in colonnes %}
@@ -24,23 +31,41 @@
                <th>Cat.</th>
                <th>Nb Comm.</th>
                <th>Action</th>
-
+     </thead>
+     <tbody>
                {% for article in articles %}
 
-               {% if article != 'id' %}
-                    <tr>
-                    <td>{{article.titre}}</td>
-                    <td>{{article.contenu}}</td>
-                    <td> <img src="{{ asset('uploads/photos/' ~ article.photo) }}" alt="{{article.photo}}" class="col-12 img-responsive"></td>
-                    <td>{{ article.date|date("m/d/Y") }}</td>
-                     <td>{{article.category.titre}}</td>
-                    <td>{{article.commentaires|length}}</td>
-                    </tr>
-                    <td><a href="{{ path('blog_edit') }}" class="stretched-link">Modifier</a></td>
+               <tr>
+                    <td>
+                         <a href="{{path('blog_show', {'id': article.id}) }}" class="link-secondary"> {{article.titre}}
+                    </td>
+
+                    <td>{{article.contenu|slice(0,100)|striptags}}[...]</td>
+
+                    {% if article.photo != null %}
+                         <td> <img src="{{ asset('uploads/photos/' ~ article.photo) }}" alt="{{article.photo}}" class="col-12 img-responsive" ></td>
+                    {% else %}
+                         <td class='text-danger text-center'>Aucune photo télechargée</td>
                     {% endif %}
+
+                   
+                    <td>{{ article.date|date("d/m/Y à H:i:s" ) }}
+                    </td>
+
+                    <td>{{article.category.titre}}</td>
+
+                    <td>{{article.commentaires|length}}</td>
+                    
+                    <td>
+                         <a href="{{path('admin_edit',{'id':article.id}) }}" class="btn btn-success mb-3"><i class="bi bi-pencil-fill"></i></a>
+
+                         <a href="{{path('app_admin_articles_remove',{'id':article.id}) }}" class="btn btn-danger" onclick="return(confirm('Voulez-vous vraiment supprimer l\'article n°{{article.id}}'));"><i class="bi bi-trash-fill"></i></a>
+                    </td> 
+
+               </tr>
                {% endfor %}
           </tr>
-          
+     </tbody>
      </table>
 
 {% endblock %}
